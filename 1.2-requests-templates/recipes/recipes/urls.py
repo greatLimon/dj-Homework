@@ -16,6 +16,10 @@ Including another URLconf
 
 from django.urls import path
 
+from calculator.views import get_recipes, nonePage
+
 urlpatterns = [
     # здесь зарегистрируйте вашу view-функцию
+    path('<dish>/',get_recipes),
+    path('', nonePage),
 ]
