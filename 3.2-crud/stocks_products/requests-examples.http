@@ -92,5 +92,10 @@ Content-Type: application/json
 ###
 
 # поиск складов, где есть определенный продукт
-GET {{baseUrl}}/stocks/?products=5
+GET {{baseUrl}}/stocks/?products=3
+Content-Type: application/json
+
+###
+
+GET {{baseUrl}}/products/?q=помидор
 Content-Type: application/json
