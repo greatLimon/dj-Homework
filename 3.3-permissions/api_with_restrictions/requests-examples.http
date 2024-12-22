@@ -32,7 +32,7 @@ Authorization: Token c8b3a13a359b509743954a046d204b9a4c55b1b4
 ###
 
 # фильтрация по создателю
-GET {{baseUrl}}/advertisements/?creator=2
+GET {{baseUrl}}/advertisements/?creator=1
 Content-Type: application/json
 
 ###

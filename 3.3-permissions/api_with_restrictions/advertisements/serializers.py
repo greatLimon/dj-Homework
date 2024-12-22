@@ -42,7 +42,7 @@ class AdvertisementSerializer(serializers.ModelSerializer):
 
         # TODO: добавьте требуемую валидацию
         pass
-        if len(Advertisement.objects.filter(creator = self.context['request'].user, status = AdvertisementStatusChoices.OPEN).all()) >= 10:
+        if Advertisement.objects.filter(creator = self.context['request'].user, status = AdvertisementStatusChoices.OPEN).count >= 10:
             raise Exception('You dont have permission to post more than 10 advertisements')
 
         return data

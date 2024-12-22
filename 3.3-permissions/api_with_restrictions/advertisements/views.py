@@ -1,20 +1,13 @@
-from rest_framework.permissions import IsAuthenticated
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.throttling import AnonRateThrottle, UserRateThrottle
-from django_filters.rest_framework import DjangoFilterBackend, DateFromToRangeFilter, FilterSet
+from django_filters.rest_framework import DjangoFilterBackend, FilterSet
 
 from .models import Advertisement
 from .serializers import AdvertisementSerializer
 from .permissions import IsOwnerOrReadOnly
+from .filters import AdvertisementFilter
 
-
-class AdvertisementFilter(FilterSet):
-    created_at = DateFromToRangeFilter()
-    updated_at = DateFromToRangeFilter()
-
-    class Meta:
-        model = Advertisement
-        fields = ['creator', 'created_at', 'updated_at']
 
 class AdvertisementViewSet(ModelViewSet):
     """ViewSet для объявлений."""
@@ -23,7 +16,7 @@ class AdvertisementViewSet(ModelViewSet):
     #   сериализаторов и фильтров
     queryset = Advertisement.objects.all()
     serializer_class = AdvertisementSerializer
-    permission_classes = [IsOwnerOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsOwnerOrReadOnly]
     throttle_classes = [AnonRateThrottle, UserRateThrottle]
     filter_backends = [DjangoFilterBackend]
     # filterset_fields = ['creator',]
